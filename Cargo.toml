@@ -1,0 +1,32 @@
+[package]
+edition = "2021"
+name = "devsolux_pdf-sign"
+version = "0.0.0"
+
+[lib]
+crate-type = ["cdylib"]
+
+# https://crates.io
+[dependencies]
+# Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
+chrono = "0.4.38"
+cryptographic-message-syntax = "0.26.0"
+gcloud-sdk = { version = "0.25.7", features = ["google-cloud-kms-v1"] }
+hex = "0.4.3"
+napi = { version = "2.16.13", default-features = false, features = ["async", "napi4", "tokio_rt"] }
+napi-derive = "2.16.12"
+p12 = "0.6.3"
+pem = "3.0.4"
+rsa = "0.9.6"
+sha256 = "1.5.0"
+signature = "2.2.0"
+tokio = { version = "1", features = ["rt", "time"] }
+tonic = "0.12.3"
+x509-certificate = "0.23.1"
+
+[build-dependencies]
+napi-build = "2.1.3"
+
+[profile.release]
+lto = true
+strip = "symbols"
