@@ -171,14 +171,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GHPR_TOKEN: ${{ secrets.GHPR_TOKEN }}
         run: |
-          echo "//npm.pkg.github.com/:_authToken=$GHPR_TOKEN" >> ~/.npmrc
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
 
           if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
             npm publish --registry="https://registry.npmjs.org/" --access public
-            npm publish --registry="https://npm.pkg.github.com/" --access public
           else
             echo "Not a release, skipping publish"
           fi
